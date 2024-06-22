@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,7 +10,7 @@ export const meta: MetaFunction = () => {
 
 const rawPath = (path: string) => {
   return import.meta.env.DEV
-    ? path
+    ? `/listen-thai-words/${path}`
     : `https://raw.githubusercontent.com/lnmunhoz/listen-thai-words/main/public${encodeURI(
         path
       )}`;
@@ -156,10 +156,19 @@ export default function Index() {
   const onInputChange = (e) => {
     setSearchTerm(e.target.value);
     const results = vocabulary.filter((vocab) => {
-      return vocab.english.toLowerCase().includes(searchTerm.toLowerCase());
+      return (
+        vocab.english.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        vocab.thai.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     });
     setSearchResults(results);
   };
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      setSearchResults(vocabulary);
+    }
+  }, [searchTerm]);
 
   return (
     <div className="font-sans p-4 w-full max-w-[848px] m-auto">
