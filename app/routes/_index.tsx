@@ -181,7 +181,7 @@ export default function Index() {
           href="https://learnthaiwithair.com/"
           target="_blank"
         >
-          Learn by with Air
+          Learn Thai with Air
         </a>
       </h2>
 
