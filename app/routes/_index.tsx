@@ -11,7 +11,7 @@ export const meta: MetaFunction = () => {
 const rawPath = (path: string) => {
   return import.meta.env.DEV
     ? path
-    : `https://github.com/lnmunhoz/listen-thai-words/raw/main/public${encodeURI(
+    : `https://raw.githubusercontent.com/lnmunhoz/listen-thai-words/main/public${encodeURI(
         path
       )}`;
 };
